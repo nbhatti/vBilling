@@ -11,9 +11,10 @@
 
 #####################################################
 FS_GIT_REPO=git://git.freeswitch.org/freeswitch.git
-FS_CONF_PATH=https://github.com/nbhatti/vBilling/raw/master/scripts/freeswitch/configuration
+FS_CONF_PATH_FSXML=
+FS_CONF_PATH_MODULE=
 FS_INSTALLED_PATH=/usr/local/freeswitch
-FS_BASE_PATH=/usr/local/src/
+FS_BASE_PATH=/usr/src/
 CURRENT_PATH=$PWD
 #####################################################
 
@@ -72,23 +73,24 @@ git clone $FS_GIT_REPO
 cd $FS_BASE_PATH/freeswitch
 sh bootstrap.sh && ./configure
 
-# We will download modules files customized for API
-# [ -f modules.conf ] && DOWNLOAD THEM HERE
+# We will download module.conf file customized for API
+wget --no-check-certificate $FS_CONF_PATH_MODULE
 
-# make && make install && make sounds-install && make moh-install
+# Good to go, let's now compile FreeSWITCH
+make && make install
 
 # Enable FreeSWITCH modules
-# cd $FS_INSTALLED_PATH/conf/autoload_configs/
-# Instead download the files
-# [ -f modules.conf.xml ] && DOWNLOAD THEM HERE
+cd $FS_INSTALLED_PATH
 
-#Configure Dialplan
-cd $FS_INSTALLED_PATH/conf/dialplan/
+# We do not want any of the configs. Let's create our own
+rm -rf *
+
+# Instead download the files
+wget --no-check-certificate FS_CONF_PATH_FSXML
 
 cd $CURRENT_PATH
 
 # Install Complete
-#clear
 echo ""
 echo ""
 echo ""
