@@ -83,7 +83,7 @@ make && make install
 cd $FS_INSTALLED_PATH
 
 # We do not want any of the configs. Let's create our own
-rm -rf *
+rm -rf conf
 
 # Instead download the files
 wget --no-check-certificate FS_CONF_PATH_FSXML
