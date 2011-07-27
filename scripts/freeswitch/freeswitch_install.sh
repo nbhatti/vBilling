@@ -1,23 +1,21 @@
 #!/bin/bash
 #
-# FreeSWITCH Installation script for CentOS 5.x/6.x and and Debian based distros 
+# FreeSWITCH Installation script for CentOS 5.x/6.x and Debian based distros 
 # (Debian 6.x , Ubuntu 10.04 and above)
 #
-# This script gears towards configuration files which are going to be used with vBilling
+# This script gears toward configuration files which are going to be used with vBilling
 #
 # Copyright (c) 2011 Digital Linx. See LICENSE for details.
 
 # Define some variables
 
+#####################################################
 FS_GIT_REPO=git://git.freeswitch.org/freeswitch.git
 FS_CONF_PATH=https://github.com/nbhatti/vBilling/raw/master/scripts/freeswitch/configuration
 FS_INSTALLED_PATH=/usr/local/freeswitch
-
-#####################################################
 FS_BASE_PATH=/usr/local/src/
-#####################################################
-
 CURRENT_PATH=$PWD
+#####################################################
 
 # Identify Linux Distribution
 if [ -f /etc/debian_version ] ; then
