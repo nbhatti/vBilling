@@ -11,8 +11,8 @@
 
 #####################################################
 FS_GIT_REPO=git://git.freeswitch.org/freeswitch.git
-FS_CONF_PATH_FSXML=
-FS_CONF_PATH_MODULE=
+FS_CONF_PATH_FSXML=https://raw.github.com/nbhatti/vBilling/master/scripts/freeswitch/freeswitch.xml
+FS_CONF_PATH_MODULE=https://raw.github.com/nbhatti/vBilling/master/scripts/freeswitch/modules.conf
 FS_INSTALLED_PATH=/usr/local/freeswitch
 FS_BASE_PATH=/usr/src/
 CURRENT_PATH=$PWD
