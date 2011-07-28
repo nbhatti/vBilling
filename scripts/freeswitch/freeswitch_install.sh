@@ -72,6 +72,7 @@ cd $FS_BASE_PATH
 git clone $FS_GIT_REPO
 cd $FS_BASE_PATH/freeswitch
 sh bootstrap.sh && ./configure
+[ -f modules.conf ] && rm -rf modules.conf
 
 # We will download module.conf file customized for API
 wget --no-check-certificate $FS_CONF_PATH_MODULE
