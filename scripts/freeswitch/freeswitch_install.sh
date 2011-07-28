@@ -33,7 +33,7 @@ fi
 clear
 echo ""
 echo "FreeSWITCH will be installed in $FS_INSTALLED_PATH"
-echo "Press any key to continue or CTRL-C to exit"
+echo "Press Enter to continue or CTRL-C to exit"
 echo ""
 read INPUT
 
@@ -74,13 +74,12 @@ cd $FS_BASE_PATH/freeswitch
 sh bootstrap.sh && ./configure
 [ -f modules.conf ] && rm -rf modules.conf
 
-# We will download module.conf file customized for API
+# We will download modules.conf file customized for our API
 wget --no-check-certificate $FS_CONF_PATH_MODULE
 
-# Good to go, let's now compile FreeSWITCH
+# Good to go, let's now compile and install FreeSWITCH
 make && make install
 
-# Enable FreeSWITCH modules
 cd $FS_INSTALLED_PATH/conf
 
 # We do not want any of the configs. Let's create our own
