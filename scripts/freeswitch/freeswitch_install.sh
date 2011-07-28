@@ -80,13 +80,13 @@ wget --no-check-certificate $FS_CONF_PATH_MODULE
 make && make install
 
 # Enable FreeSWITCH modules
-cd $FS_INSTALLED_PATH
+cd $FS_INSTALLED_PATH/conf
 
 # We do not want any of the configs. Let's create our own
-rm -rf conf
+rm -rf $FS_INSTALLED_PATH/conf/*
 
 # Instead download the files
-wget --no-check-certificate FS_CONF_PATH_FSXML
+wget --no-check-certificate $FS_CONF_PATH_FSXML
 
 cd $CURRENT_PATH
 
