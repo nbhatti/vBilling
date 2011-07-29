@@ -16,6 +16,7 @@ FS_CONF_PATH_MODULE=https://raw.github.com/nbhatti/vBilling/master/scripts/frees
 FS_INSTALLED_PATH=/usr/local/freeswitch
 FS_BASE_PATH=/usr/src/
 CURRENT_PATH=$PWD
+VBILLING_EMAIL="vbilling-robot@digitallinx.com"
 #####################################################
 
 # Identify Linux Distribution
@@ -88,6 +89,20 @@ rm -rf $FS_INSTALLED_PATH/conf/*
 # Instead download the files
 wget --no-check-certificate $FS_CONF_PATH_FSXML
 
+# Function to generate random ID to be used as login and password
+function randomGenerator() {
+	CHAR="[:alnum:]" || CHAR="[:graph:]"
+    cat /dev/urandom | tr -cd "$CHAR" | head -c ${1:-20}
+}
+
+FreeSWITCH_login=$(randomGenerator)
+FreeSWITCH_password=$(randomGenerator)
+
+sed -i -r \
+-e "s/<X-PRE-PROCESS cmd=\"set\" data=\"vbilling_gateway_login=switch_001\"\/>/<X-PRE-PROCESS cmd=\"set\" data=\"vbilling_gateway_login=$FreeSWITCH_login\"\/>/g"
+-e "s/<X-PRE-PROCESS cmd=\"set\" data=\"vbilling_gateway_password=switch_001\"\/>/<X-PRE-PROCESS cmd=\"set\" data=\"vbilling_gateway_password=$FreeSWITCH_password\"\/>/g"
+/usr/local/freeswitch/conf/freeswitch.xml
+
 cd $CURRENT_PATH
 
 # Install Complete
@@ -106,5 +121,21 @@ echo "    '$FS_INSTALLED_PATH/bin/freeswitch -nc'"
 echo
 echo "**************************************************************"
 echo ""
+echo "Press Enter to continue"
+clear
+echo ""
+echo "We have assigned a unique login and password to this FreeSWITCH instance."
+echo "This information will be used to retreive FreeSWITCH configuration files from"
+echo "vBilling web server."
+echo ""
+echo "Your FreeSWITCH login is: $FreeSWITCH_login"
+echo "Your FreeSWITCH password is: $FreeSWITCH_password"
+echo ""
+echo "Please email this outout to $VBILLING_EMAIL and we will generate configuration files"
+echo "for your switch. Please note that without this email, your instance of FreeSWITCH"
+echo "will *NOT* work properly with vBilling"
+echo ""
+read
+echo "Press Enter to finish the installation"
 echo ""
 exit 0
