@@ -98,9 +98,9 @@ function randomGenerator() {
 FreeSWITCH_login=$(randomGenerator)
 FreeSWITCH_password=$(randomGenerator)
 
-sed -i -r \
--e "s/<X-PRE-PROCESS cmd=\"set\" data=\"vbilling_gateway_login=switch_001\"\/>/<X-PRE-PROCESS cmd=\"set\" data=\"vbilling_gateway_login=$FreeSWITCH_login\"\/>/g"
--e "s/<X-PRE-PROCESS cmd=\"set\" data=\"vbilling_gateway_password=switch_001\"\/>/<X-PRE-PROCESS cmd=\"set\" data=\"vbilling_gateway_password=$FreeSWITCH_password\"\/>/g"
+sed -i \
+-e "s/<X-PRE-PROCESS cmd=\"set\" data=\"vbilling_gateway_login=switch_001\"\/>/<X-PRE-PROCESS cmd=\"set\" data=\"vbilling_gateway_login=$FreeSWITCH_login\"\/>/g" \
+-e "s/<X-PRE-PROCESS cmd=\"set\" data=\"vbilling_gateway_password=SomeVerySecretAndRandomPassword\"\/>/<X-PRE-PROCESS cmd=\"set\" data=\"vbilling_gateway_password=$FreeSWITCH_password\"\/>/g" \
 /usr/local/freeswitch/conf/freeswitch.xml
 
 cd $CURRENT_PATH
